@@ -12,5 +12,15 @@ router.get('/', async (req, res) => {
     }
 });
 
+router.get('/:id', async (req,res) => {
+    const {id} = req.params;
+    try {
+        car = await db('cars',).where('id', id);
+        res.json(car);
+    } catch(err){
+        res.status(500).json({errorMessage: 'there was a problem retrieving data from database'})
+    }
+})
+
 
 module.exports = router;
