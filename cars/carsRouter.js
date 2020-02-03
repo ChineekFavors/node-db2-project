@@ -43,5 +43,15 @@ router.put('/:id', async (req,res) => {
     }    
 });
 
+router.delete('/:id', async (req,res) => {
+    const {id} = req.params;
+    try {
+        const carDeleted = await db('cars').where('id', id).del();
+        res.status(200).json({carsdeleted: carDeleted });
+    } catch(err) {
+        res.status(500).json({errorMessage: 'there was a problem deleting from the data-base'});
+    }
+});
+
 
 module.exports = router;
